@@ -1,0 +1,8 @@
+.flexline {
+  display: flex;
+  flex-direction: row nowrap;
+
+  .box {
+    flex: 1;
+  }
+}

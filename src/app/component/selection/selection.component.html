@@ -1,0 +1,24 @@
+<div class='wrapper'>
+  <div class='flexline'>
+    <div class='box'>
+      <p>
+        departure station
+      </p>
+      <select [(ngModel)]='fromMRT'>
+        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>
+      </select>
+    </div>
+    <div class='box'>
+      <p>
+        destiny station
+      </p>
+      <select [(ngModel)]='toMRT'>
+        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>
+      </select>
+    </div>
+    <div class='box'>
+      <button (click)='sendQuery()'>query</button>
+    </div>
+  </div>
+
+</div>
