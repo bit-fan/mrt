@@ -9,6 +9,8 @@ import { SelectionComponent } from './component/selection/selection.component';
 
 // service
 import { MRTService } from './service/mrt.service';
+import { UtilService } from './service/util.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { MRTService } from './service/mrt.service';
     BrowserModule,
     FormsModule
   ],
-  providers: [MRTService],
+  providers: [MRTService, UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

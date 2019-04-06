@@ -17,6 +17,14 @@
       </select>
     </div>
     <div class='box'>
+      <p>
+        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minDist' /> Shortest Distance</label>
+      </p>
+      <p>
+        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minChange' />Minimum Change</label>
+      </p>
+    </div>
+    <div class='box'>
       <button (click)='sendQuery()'>query</button>
     </div>
   </div>

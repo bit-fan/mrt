@@ -13,6 +13,7 @@ export class SelectionComponent implements OnInit {
   allStation: any[] = [];
   fromMRT;
   toMRT;
+  pathType = 'minDist';
   @Output('queryNow') queryNow = new EventEmitter();
   ngOnInit() {
     const mrtObj = this.mrtSvc.getAllStation();
@@ -20,11 +21,14 @@ export class SelectionComponent implements OnInit {
       mrtObj[a].id = a;
       return mrtObj[a];
     });
+    this.fromMRT=this.allStation[0].id;
+    this.toMRT=this.allStation[0].id;
   }
   sendQuery() {
     this.queryNow.emit({
       from: this.fromMRT,
-      to: this.toMRT
+      to: this.toMRT,
+      type: this.pathType
     })
   }
 
