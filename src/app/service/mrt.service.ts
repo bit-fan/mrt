@@ -90,14 +90,16 @@ export class MRTService {
   findRoutes(query) {
     let solutionArr;
     if (query.type === 'minDist') {
-      solutionArr = this.getShortestPath(query.from, query.to, query.numSolution);
+      solutionArr = this.getShortestPath(query.from, query.to, query.best);
       console.log(solutionArr);
     } else if (query.type === 'minDist') {
-      solutionArr = this.getShortestPath(query.from, query.to, query.numSolution);
+      solutionArr = this.getShortestPath(query.from, query.to, query.best);
       console.log(solutionArr);
     }
     solutionArr.map(path => {
       const solution = new Solution(path);
+      const text = Solution.createRouteText(path.map(a => this.stationData[a]));
+      console.log(text);
     })
   }
   getShortestPath(from, to, max = 5) {
@@ -141,9 +143,6 @@ export class MRTService {
         console.log(
           solutionArr.length, route.path.map(id =>
             this.stationData[id].name).join(', '));
-        if (solutionArr.length > max) {
-          return solutionArr;
-        }
       }
     })
     // if (newPathtoAdd.length > 5000) {
@@ -156,6 +155,9 @@ export class MRTService {
     //       this.stationData[id].name).join(', '));
     // })
 
+    if (solutionArr.length >= max) {
+      return solutionArr.slice(0, max);
+    }
     if (newPathtoAdd.length === 0) {
       return solutionArr;
     }

@@ -25,6 +25,14 @@
       </p>
     </div>
     <div class='box'>
+      <p>
+        Top best
+      </p>
+      <select [(ngModel)]='numBest'>
+        <option *ngFor='let best of bestOptions' value='{{best}}'>{{best}}</option>
+      </select>
+    </div>
+    <div class='box'>
       <button (click)='sendQuery()'>query</button>
     </div>
   </div>
