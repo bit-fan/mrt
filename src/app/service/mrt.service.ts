@@ -15,6 +15,7 @@ export class MRTService {
   srcObj: any;
   stationData: any = {};
   stationNametoId = {};
+  allLines: any[] = [];
   constructor(private util: UtilService, private solutionSvc: SolutionService) {
     this.srcObj = originalStationJSON['default'];
     const possibleStation = new Set();
@@ -81,10 +82,13 @@ export class MRTService {
       this.stationData[id].links = Array.from(new Set(this.stationData[id].links));
     });
     console.log(this.stationData, possibleStation, lineMinMax);
-
+    this.allLines = Object.keys(lineMinMax);
   }
   getAllStation() {
     return this.stationData;
+  }
+  getAllLines() {
+    return this.allLines;
   }
   getStationData(num) {
     return this.stationData[num];
@@ -94,11 +98,11 @@ export class MRTService {
   }
   findRoutes(query) {
     let pathArr;
-    if (query.type === 'minDist') {
+    if (query.type === 'dist') {
       pathArr = this.getShortestPath(query.from, query.to, query.best);
       console.log(pathArr);
 
-    } else if (query.type === 'minDist') {
+    } else if (query.type === 'dist') {
       pathArr = this.getShortestPath(query.from, query.to, query.best);
       console.log(pathArr);
     }

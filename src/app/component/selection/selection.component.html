@@ -1,40 +1,57 @@
 <div class='wrapper'>
-  <div class='flexline'>
-    <div class='box'>
-      <p>
-        departure station
-      </p>
-      <select [(ngModel)]='fromMRT'>
-        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>
-      </select>
-    </div>
-    <div class='box'>
-      <p>
-        destiny station
-      </p>
-      <select [(ngModel)]='toMRT'>
-        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>
-      </select>
-    </div>
-    <div class='box'>
-      <p>
-        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minDist' /> Shortest Distance</label>
-      </p>
-      <p>
-        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minChange' />Minimum Change</label>
-      </p>
-    </div>
-    <div class='box'>
-      <p>
-        Top best
-      </p>
-      <select [(ngModel)]='numBest'>
-        <option *ngFor='let best of bestOptions' value='{{best}}'>{{best}}</option>
-      </select>
-    </div>
-    <div class='box'>
-      <button (click)='sendQuery()'>query</button>
-    </div>
+  <div class='final-query-box'>
+    List the top
+    <span *ngIf='!showBest' class='selected' (click)='showBest=true'>{{numBest}}</span>
+    <select *ngIf='showBest' [(ngModel)]='numBest' (select)='showBest=false' (blur)='showBest=false'>
+      <option *ngFor='let best of bestOptions' value='{{best}}'>{{best}}</option>
+    </select> result from
+    <span class='selected' [ngClass]="{'invalid':!fromMRT}"
+      (click)='showSelection("from")'>{{(fromMRT && fromMRT.name) || 'select station'}}</span> to
+    <span class='selected' [ngClass]="{'invalid':!toMRT}"
+      (click)='showSelection("to")'>{{(toMRT && toMRT.name) || 'select station'}}</span>, ranked by
+    <span class='selected' (click)='changeRank()'>{{pathType}}</span>
+    <button (click)='sendQuery()' [disabled]='queryInvalid'>Start</button>
   </div>
-
+  <ng-container *ngIf='showFilterBox'>
+    <div class='condition-box'>
+      <table>
+        <tr>
+          <td>selectLine</td>
+          <td>
+            <select [(ngModel)]='filterLine' (change)='filterMRT()'>
+              <option value='any'>All line</option>
+              <option *ngFor='let line of allLines' value='{{line}}'>{{line}}</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td>is interchange</td>
+          <td>
+            <label><input type='radio' name='isinterchange' [(ngModel)]='filterInter' value='yes'
+                (change)='filterMRT()' /> Yes</label>
+            <label><input type='radio' name='isinterchange' [(ngModel)]='filterInter' value='no'
+                (change)='filterMRT()' /> No</label>
+            <label><input type='radio' name='isinterchange' [(ngModel)]='filterInter' value='all'
+                (change)='filterMRT()' /> All</label></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td><input [(ngModel)]='filterName' (keyup)='filterMRT()' /></td>
+        </tr>
+      </table>
+    </div>
+    <div class='list-box'>
+      <table>
+        <tr *ngFor='let mrt of filteredMRT' (click)='setMRT(mrt);'>
+          <td>{{mrt.name}}</td>
+          <td>
+            <app-station-num-badge *ngFor='let station of mrt.stationNames' [data]='station'>
+            </app-station-num-badge>
+          </td>
+        </tr>
+        <tr *ngIf='filteredMRT.length===0'>
+          <td>No available MRT</td>
+        </tr>
+      </table>
+    </div>
+  </ng-container>
 </div>

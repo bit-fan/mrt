@@ -10,7 +10,7 @@ import { SolutionService } from './../../service/solution.service';
 export class ResultComponent implements OnInit {
 
   solutionArr = [];
-  solutionProp;
+  solutionProp = {};
   constructor(private solutionSvc: SolutionService) { }
 
   ngOnInit() {

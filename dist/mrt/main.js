@@ -271,7 +271,7 @@ var ResultComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class='wrapper'>\n  <div class='flexline'>\n    <div class='box'>\n      <p>\n        departure station\n      </p>\n      <select [(ngModel)]='fromMRT'>\n        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <p>\n        destiny station\n      </p>\n      <select [(ngModel)]='toMRT'>\n        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <p>\n        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minDist' /> Shortest Distance</label>\n      </p>\n      <p>\n        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='minChange' />Minimum Change</label>\n      </p>\n    </div>\n    <div class='box'>\n      <p>\n        Top best\n      </p>\n      <select [(ngModel)]='numBest'>\n        <option *ngFor='let best of bestOptions' value='{{best}}'>{{best}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <button (click)='sendQuery()'>query</button>\n    </div>\n  </div>\n\n</div>\n"
+module.exports = "<div class='wrapper'>\n  <div class='flexline'>\n    <div class='box'>\n      <p>\n        departure station\n      </p>\n      <select [(ngModel)]='fromMRT'>\n        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <p>\n        destiny station\n      </p>\n      <select [(ngModel)]='toMRT'>\n        <option *ngFor='let station of allStation' value='{{station.id}}'>{{station.name}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <p>\n        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='dist' /> Shortest Distance</label>\n      </p>\n      <p>\n        <label><input type='radio' name='pathtype' [(ngModel)]='pathType' value='change' />Minimum Change</label>\n      </p>\n    </div>\n    <div class='box'>\n      <p>\n        Top best\n      </p>\n      <select [(ngModel)]='numBest'>\n        <option *ngFor='let best of bestOptions' value='{{best}}'>{{best}}</option>\n      </select>\n    </div>\n    <div class='box'>\n      <button (click)='sendQuery()'>query</button>\n    </div>\n  </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -306,7 +306,7 @@ var SelectionComponent = /** @class */ (function () {
     function SelectionComponent(mrtSvc) {
         this.mrtSvc = mrtSvc;
         this.allStation = [];
-        this.pathType = 'minDist';
+        this.pathType = 'dist';
         this.bestOptions = [3, 5, 10, 20];
         this.numBest = this.bestOptions[0];
         this.queryNow = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
@@ -583,11 +583,11 @@ var MRTService = /** @class */ (function () {
     MRTService.prototype.findRoutes = function (query) {
         var _this = this;
         var solutionArr;
-        if (query.type === 'minDist') {
+        if (query.type === 'dist') {
             solutionArr = this.getShortestPath(query.from, query.to, query.best);
             console.log(solutionArr);
         }
-        else if (query.type === 'minDist') {
+        else if (query.type === 'dist') {
             solutionArr = this.getShortestPath(query.from, query.to, query.best);
             console.log(solutionArr);
             this.solutionSvc.updateSolution(solutionArr);

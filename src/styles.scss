@@ -1,2 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/styles/station-color';
+
+
+.align-right {
+  text-align: right;
+  display: inline-block;
+}
+
+.align-left {
+  text-align: left;
+  display: inline-block;
+}
+
+.align-center {
+  text-align: center;
+  display: inline-block;
+}

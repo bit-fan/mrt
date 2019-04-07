@@ -5,4 +5,51 @@
   .box {
     flex: 1;
   }
+
+  .box3 {
+    flex: 3;
+  }
+}
+
+.condition-box {
+  display: inline-block;
+
+  height: 100px;
+}
+
+.list-box {
+  display: inline-block;
+  border: solid 1px blue;
+  border-radius: 5px;
+  padding: 5px;
+  overflow-y: auto;
+  height: 100px;
+  width: 400px;
+
+  >table {
+    width: 100%;
+
+    tr:hover {
+      background: blue;
+    }
+  }
+}
+
+.selected {
+  background: lightgreen;
+  padding: 5px 5px;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.invalid {
+  background: red !important;
+}
+
+.final-query-box {
+  margin-bottom: 5px;
+
+  button {
+    margin-left: 10px;
+  }
 }
