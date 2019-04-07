@@ -1,0 +1,21 @@
+<div class='wrapper'>
+  <!-- {{data | json}} -->
+  <ng-container *ngIf='data.type==="Take"'>
+    <span>Take</span>
+    <app-station-num-badge *ngFor='let station of data.line' [data]='station'></app-station-num-badge>
+    <span>Line from </span>
+    <b>{{data.from.name}}</b>
+    (<app-station-num-badge *ngFor='let station of data.from.stationNames' [data]='station'></app-station-num-badge>)
+    <span> and <i>{{data.numStops}}</i> stop<span *ngIf='data.numStops!=1'>s</span> to </span>
+    <b>{{data.to.name}}</b>
+    (<app-station-num-badge *ngFor='let station of data.to.stationNames' [data]='station'></app-station-num-badge>)
+
+  </ng-container>
+  <ng-container *ngIf='data.type==="Change"'>
+    <span>Change to</span>
+    <app-station-num-badge *ngFor='let station of data.line' [data]='station'></app-station-num-badge>
+    <span>Line and take <i>{{data.numStops}}</i> stop<span *ngIf='data.numStops!=1'>s</span> to </span>
+    <b>{{data.to.name}}</b>
+    (<app-station-num-badge *ngFor='let station of data.to.stationNames' [data]='station'></app-station-num-badge>)
+  </ng-container>
+</div>

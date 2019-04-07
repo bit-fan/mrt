@@ -15,13 +15,14 @@ export class Station {
   }
   static getCommonLine(sta1: Station, sta2: Station, sta3: Station) {
     if (!sta1 || !sta2 || !sta3) {
-      return '';
+      return [];
     }
     const name1 = sta1.stationNames.map(name => name.slice(0, 2));
     const name2 = sta2.stationNames.map(name => name.slice(0, 2));
     const name3 = sta3.stationNames.map(name => name.slice(0, 2));
 
     const common = [name1, name2, name3].reduce((p, c) => p.filter(e => c.includes(e)));
+    console.log(name1, name2, name3, common);
     return common;
   }
 

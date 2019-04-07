@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// import { Subscriber } from 'rxjs';
+import { SolutionService } from './../../service/solution.service';
 
 @Component({
   selector: 'app-result',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  solutionArr = [];
+  solutionProp;
+  constructor(private solutionSvc: SolutionService) { }
 
   ngOnInit() {
+    this.solutionSvc.solutions$.subscribe(data => {
+      this.solutionArr = data['data'] || [];
+      this.solutionProp = data['prop'] || {};
+    });
   }
+
 
 }

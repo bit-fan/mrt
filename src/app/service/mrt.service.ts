@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import * as station from '../../assets/stations.json';
+import * as originalStationJSON from '../../assets/stations.json';
 import { UtilService } from './util.service';
 import { Station } from '../model/station';
 import { Route } from '../model/route';
 import { Solution } from './../model/solution';
+import { SolutionService } from './solution.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +15,8 @@ export class MRTService {
   srcObj: any;
   stationData: any = {};
   stationNametoId = {};
-  constructor(private util: UtilService) {
-    this.srcObj = station['default'];
+  constructor(private util: UtilService, private solutionSvc: SolutionService) {
+    this.srcObj = originalStationJSON['default'];
     const possibleStation = new Set();
     const lineMinMax: any = {};
 
@@ -84,23 +86,33 @@ export class MRTService {
   getAllStation() {
     return this.stationData;
   }
+  getStationData(num) {
+    return this.stationData[num];
+  }
   check() {
     console.log('sss', this.srcObj);
   }
   findRoutes(query) {
-    let solutionArr;
+    let pathArr;
     if (query.type === 'minDist') {
-      solutionArr = this.getShortestPath(query.from, query.to, query.best);
-      console.log(solutionArr);
+      pathArr = this.getShortestPath(query.from, query.to, query.best);
+      console.log(pathArr);
+
     } else if (query.type === 'minDist') {
-      solutionArr = this.getShortestPath(query.from, query.to, query.best);
-      console.log(solutionArr);
+      pathArr = this.getShortestPath(query.from, query.to, query.best);
+      console.log(pathArr);
     }
-    solutionArr.map(path => {
+    const solutionArr = pathArr.map(path => {
       const solution = new Solution(path);
-      const text = Solution.createRouteText(path.map(a => this.stationData[a]));
-      console.log(text);
-    })
+      const soluObj = Solution.createRouteText(path.map(a => this.stationData[a]));
+      return { prop: { numStops: path.length }, solution: soluObj };
+    });
+
+    this.solutionSvc.updateSolution({
+      from: this.stationData[query.from],
+      to: this.stationData[query.to],
+      best: query.best
+    }, solutionArr);
   }
   getShortestPath(from, to, max = 5) {
     console.log(from, to, max);

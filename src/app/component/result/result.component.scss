@@ -1,0 +1,14 @@
+.route-wrapper {
+  border-bottom: solid 3px red;
+  padding: 20px;
+
+  .route-title {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .path-step>div {
+    display: inline-block;
+  }
+}

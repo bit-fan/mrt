@@ -1,0 +1,4 @@
+<ng-container>
+  <div class='label'>{{stationData.name}}</div>
+  <app-station-num-badge *ngFor='let station of stationData.stationNames' [data]='station'></app-station-num-badge>
+</ng-container>
