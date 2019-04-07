@@ -9,7 +9,7 @@
       (click)='showSelection("from")'>{{(fromMRT && fromMRT.name) || 'select station'}}</span> to
     <span class='selected' [ngClass]="{'invalid':!toMRT}"
       (click)='showSelection("to")'>{{(toMRT && toMRT.name) || 'select station'}}</span>, ranked by
-    <span class='selected' (click)='changeRank()'>{{pathType}}</span>
+    <span class='selected' (click)='changeRank()'>{{pathType ==='dist' ? 'Distance' : 'number of changes'}}</span>
     <button (click)='sendQuery()' [disabled]='queryInvalid'>Start</button>
   </div>
   <ng-container *ngIf='showFilterBox'>
@@ -18,7 +18,7 @@
         <tr>
           <td>selectLine</td>
           <td>
-            <select [(ngModel)]='filterLine' (change)='filterMRT()'>
+            <select class='full-width-input' [(ngModel)]='filterLine' (change)='filterMRT()'>
               <option value='any'>All line</option>
               <option *ngFor='let line of allLines' value='{{line}}'>{{line}}</option>
             </select></td>
@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <td>name</td>
-          <td><input [(ngModel)]='filterName' (keyup)='filterMRT()' /></td>
+          <td><input class='full-width-input' [(ngModel)]='filterName' (keyup)='filterMRT()' /></td>
         </tr>
       </table>
     </div>

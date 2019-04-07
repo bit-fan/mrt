@@ -91,7 +91,7 @@ export class MRTService {
     return this.allLines;
   }
   getStationData(num) {
-    return this.stationData[num];
+    return this.stationData[num] || this.srcObj[num];
   }
   check() {
     console.log('sss', this.srcObj);
@@ -116,7 +116,7 @@ export class MRTService {
       from: this.stationData[query.from],
       to: this.stationData[query.to],
       best: query.best
-    }, solutionArr);
+    }, solutionArr, pathArr);
   }
   getShortestPath(from, to, max = 5) {
     console.log(from, to, max);

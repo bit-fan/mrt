@@ -11,9 +11,11 @@ import { SelectionComponent } from './component/selection/selection.component';
 import { MRTService } from './service/mrt.service';
 import { UtilService } from './service/util.service';
 import { SolutionService } from './service/solution.service';
+import { MapService } from './service/map.service';
 import { DisplayRouteTextComponent } from './component/result/display-route-text/display-route-text.component';
 import { StationBadgeComponent } from './component/station-badge/station-badge.component';
 import { StationNumBadgeComponent } from './component/station-num-badge/station-num-badge.component';
+import { MrtMapComponent } from './component/mrt-map/mrt-map.component';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,14 @@ import { StationNumBadgeComponent } from './component/station-num-badge/station-
     SelectionComponent,
     DisplayRouteTextComponent,
     StationBadgeComponent,
-    StationNumBadgeComponent
+    StationNumBadgeComponent,
+    MrtMapComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [MRTService, UtilService, SolutionService],
+  providers: [MRTService, UtilService, SolutionService, MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

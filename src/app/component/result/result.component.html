@@ -11,7 +11,7 @@
       <ul>
         <li *ngFor='let row of solu.solution;let idx1=index' class='path-step'>
           <!-- <div class='index'>{{idx1+1}}</div> -->
-          <div>
+          <div (mouseover)='mouseoverPath(idx,solu,row)'>
             <app-display-route-text [data]='row'></app-display-route-text>
           </div>
         </li>
