@@ -22,7 +22,6 @@ export class Station {
     const name3 = sta3.stationNames.map(name => name.slice(0, 2));
 
     const common = [name1, name2, name3].reduce((p, c) => p.filter(e => c.includes(e)));
-    console.log(name1, name2, name3, common);
     return common;
   }
 

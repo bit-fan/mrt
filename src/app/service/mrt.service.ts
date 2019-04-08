@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as originalStationJSON from '../../assets/stations.json';
+import * as originalStationJSON from '../../assets/json/stations.json';
 import { UtilService } from './util.service';
 import { Station } from '../model/station';
 import { Route } from '../model/route';

@@ -12,7 +12,6 @@ export class SolutionService {
   public solutions$ = new Subject();
   constructor() { }
   updateSolution(prop, solu, path) {
-    console.log('recei', solu);
     this.solutions$.next({ prop: prop, data: solu, path: path });
   }
 }

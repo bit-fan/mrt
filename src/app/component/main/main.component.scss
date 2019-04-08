@@ -1,12 +1,11 @@
-.result-wrapper {
-  display: flex;
-  flex-flow: row nowrap;
+.wrapper {
+  padding: 20px;
 
-  .result-box {
-    flex: 1;
-  }
-
-  .map-box {
-    flex: 1;
+  .flex-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    .flex1 {
+      flex: 1;
+    }
   }
 }

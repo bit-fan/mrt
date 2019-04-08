@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MRTService } from '../../service/mrt.service';
-
+import { MapService } from './../../service/map.service';
 @Component({
   selector: 'app-selection',
   templateUrl: './selection.component.html',
@@ -9,7 +9,7 @@ import { MRTService } from '../../service/mrt.service';
 })
 export class SelectionComponent implements OnInit {
 
-  constructor(private mrtSvc: MRTService) { }
+  constructor(private mrtSvc: MRTService, private mapSvc: MapService) { }
   allStation: any[] = [];
   filteredMRT: any[] = [];
   fromMRT;
@@ -32,16 +32,11 @@ export class SelectionComponent implements OnInit {
       mrtObj[a].id = a;
       return mrtObj[a];
     });
-    // this.fromMRT = this.allStation[0];
-    // this.toMRT = this.allStation[0];
-
-    ///
 
     this.allLines = this.mrtSvc.getAllLines();
     this.filterMRT();
   }
   filterMRT() {
-    console.log(this.filterName, this.filterLine, this.filterInter);
     const lower = this.filterName && this.filterName.toLowerCase();
     this.filteredMRT = this.allStation.filter(sta => {
       if (lower) {
@@ -67,7 +62,9 @@ export class SelectionComponent implements OnInit {
       to: this.toMRT.id,
       type: this.pathType,
       best: this.numBest
-    })
+    });
+    this.mapSvc.drawCircles([]);
+    this.mapSvc.drawPath([]);
   }
   showSelection(which) {
     this.selectFor = which;

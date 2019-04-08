@@ -1,14 +1,18 @@
 <div class='wrapper'>
-  <div class='selection'>
-    <h3>Find the best MRT route</h3>
-    <app-selection (queryNow)='query($event)'></app-selection>
-  </div>
-  <div class='result-wrapper'>
-    <div class='result-box'>
-      <app-result></app-result>
+  <div class='flex-wrapper'>
+    <div class='flex1'>
+      <div>
+        <h3>Find the best MRT route</h3>
+        <app-selection (queryNow)='query($event)'></app-selection>
+      </div>
+      <div>
+        <app-result></app-result>
+      </div>
     </div>
-    <div class='map-box'>
+    <div class='flex1'>
       <app-mrt-map></app-mrt-map>
     </div>
   </div>
+
+
 </div>

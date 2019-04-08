@@ -8,9 +8,9 @@
     <span class='selected' [ngClass]="{'invalid':!fromMRT}"
       (click)='showSelection("from")'>{{(fromMRT && fromMRT.name) || 'select station'}}</span> to
     <span class='selected' [ngClass]="{'invalid':!toMRT}"
-      (click)='showSelection("to")'>{{(toMRT && toMRT.name) || 'select station'}}</span>, ranked by
-    <span class='selected' (click)='changeRank()'>{{pathType ==='dist' ? 'Distance' : 'number of changes'}}</span>
-    <button (click)='sendQuery()' [disabled]='queryInvalid'>Start</button>
+      (click)='showSelection("to")'>{{(toMRT && toMRT.name) || 'select station'}}</span>, ranked by distance
+    <!-- <span class='selected' (click)='changeRank()'>{{pathType ==='dist' ? 'Distance' : 'number of changes'}}</span> -->
+    <button (click)='sendQuery()' [disabled]='queryInvalid'>Find Route</button>
   </div>
   <ng-container *ngIf='showFilterBox'>
     <div class='condition-box'>

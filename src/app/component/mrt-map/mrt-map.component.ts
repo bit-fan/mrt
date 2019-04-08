@@ -9,22 +9,24 @@ import { MapService } from './../../service/map.service';
 })
 export class MrtMapComponent implements OnInit {
 
-  test1 = '';
-
-  constDashArr = ['0, 100', '20, 80', '40, 60', '60,40', '80,20', '100,0'];
+  pathString = '';
+  dashArray: any = '';
   dashIdx = 0;
+  circles: any = [];
   constructor(private mapSvc: MapService) { }
 
   ngOnInit() {
-    // this.test1 = this.generatePath([[300, 400], [500, 800], [700, 400]]);
     this.mapSvc.drawPath$.subscribe(data => {
-      this.test1 = this.generatePath(data as any[]);
+      this.pathString = this.generatePath(data as any[]);
     });
-    setInterval(() => {
-      this.dashArray = this.constDashArr[(++this.dashIdx) % this.constDashArr.length];
-    }, 500);
+    this.mapSvc.drawCircles$.subscribe(data => {
+      this.circles = data;
+    });
   }
   generatePath(pts: any[]) {
+    if (pts.length === 0) {
+      return '';
+    }
     const getStr = pt => {
       return pt[0] + ', ' + pt[1];
     }

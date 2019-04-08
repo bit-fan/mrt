@@ -5,12 +5,13 @@
 
   .route-wrapper {
     border-bottom: solid 3px red;
-    padding: 20px;
+    padding: 10px 10px 0;
 
     .route-title {
       font-style: italic;
       font-weight: bold;
       font-size: 16px;
+      text-shadow: 1px 1px 0px lightblue;
     }
 
     .path-step>div {

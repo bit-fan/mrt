@@ -21,13 +21,15 @@ export class ResultComponent implements OnInit {
       this.solutionArr = data['data'] || [];
       this.solutionProp = data['prop'] || {};
       this.pathArr = data['path'] || [];
-      console.log(this.solutionArr, this.pathArr);
-      // getPosArr
     });
   }
-  mouseoverPath(idx, solu, path) {
-    console.log(this.pathArr[idx], solu, path);
+  mouseoverPath(idx, solu) {
     this.mapSvc.drawPath(this.pathArr[idx]);
+    const pts = [solu[0].from.name];
+    solu.forEach(sta => {
+      pts.push(sta.to.name);
+    })
+    this.mapSvc.drawCircles(pts);
   }
 
 

@@ -14,7 +14,6 @@ export class MainComponent implements OnInit {
     this.mrtSvc.check();
   }
   query(evt) {
-    console.log(evt);
     this.mrtSvc.findRoutes(evt);
   }
 }

@@ -1,7 +1,25 @@
+@keyframes offset {
+  0% {
+    stroke-dashoffset: 100;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 .map-wrapper {
-  width: 98%;
+  width: 100%;
   height: auto;
   background-size: cover;
   background-repeat: no-repeat;
 
+  .route-path {
+    stroke-dasharray: 50;
+    animation: offset 2s infinite linear;
+    stroke-linecap: round;
+    stroke-linejoin: bevel;
+    stroke: green;
+    stroke-width: 40;
+  }
 }

@@ -1,4 +1,4 @@
-<div class='wrapper' *ngIf='solutionProp.from'>
+<div class='wrapper' *ngIf='solutionProp["from"]'>
 
   <h3>Query top {{solutionArr.length}} result from <b>{{solutionProp.from.name}}</b> to <b>{{solutionProp.to.name}}</b>
   </h3>
@@ -8,11 +8,11 @@
         line<span *ngIf='solu.solution.length!=1'>s</span> and {{solu.prop.numStops}}
         stop<span *ngIf='solu.prop.numStops!=1'>s</span>
       </div>
-      <div class='content'>
+      <div class='content' (mouseover)='mouseoverPath(idx,solu.solution)'>
         <ul>
           <li *ngFor='let row of solu.solution;let idx1=index' class='path-step'>
             <!-- <div class='index'>{{idx1+1}}</div> -->
-            <div (mouseover)='mouseoverPath(idx,solu,row)'>
+            <div>
               <app-display-route-text [data]='row'></app-display-route-text>
             </div>
           </li>
